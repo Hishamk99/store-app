@@ -12,9 +12,10 @@ class Api {
           'Theres a problem with status code ${response.statusCode}');
     }
   }
+
   Future<dynamic> post(
       {required String url,
-      @required String? body,
+      @required Map<String, String>? body,
       @required String? token}) async {
     Map<String, String> headers = {};
     if (token != null) {
@@ -24,8 +25,13 @@ class Api {
     }
     http.Response response =
         await http.post(Uri.parse(url), body: body, headers: headers);
-    Map<String , dynamic> data = jsonDecode(response.body);
-    return data;    
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = jsonDecode(response.body);
+      return data;
+    } else {
+      throw Exception(
+      'there was a problem with status code ${response.statusCode} with body${jsonDecode(response.body)}');
+    }
   }
 }
 
@@ -34,11 +40,3 @@ class Api {
       // 'Accept': 'application/json',
       // 'Content-type': 'application/x-www-form-urlencoded',
       // 'Authorization': 'Bearer ',
-
-
-
-      // 'titlt' : 'test' ,
-      // 'price' : '12.5' ,
-      // 'description' : 'lorem ijsao set' ,
-      // 'image' : 'https://i.pravatar.cc' ,
-      // 'ctegory' : 'electronic' ,
