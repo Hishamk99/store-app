@@ -7,4 +7,5 @@ class AllCategoryService {
 
     return data;
   }
+  
 }
