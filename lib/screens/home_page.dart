@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:store_app/widgets/custom_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -26,64 +27,19 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Container(
-            width: 220,
-            height: 130,
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2), // تخفيف حدة اللون
-                blurRadius: 40,
-                spreadRadius: 0,
-                offset: const Offset(10, 10),
-              )
-            ]),
-            child: const Card(
-              elevation: 10,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'AHandBag Lv',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          r'$225',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                        Icon(
-                          Icons.favorite,
-                          color: Colors.red,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 65),
+        child: GridView.builder(
+            clipBehavior: Clip.none,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1.5, // remove width and height of container
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 100,
             ),
-          ),
-          Positioned(
-            right: 32,
-            bottom: 100,
-            child: Image.network('' , height: 85,),
-          ),
-        ],
+            itemBuilder: (context, index) {
+              return const CustomCard();
+            }),
       ),
     );
   }
