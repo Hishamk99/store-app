@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:store_app/models/product_model.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({super.key});
+  const CustomCard({super.key , required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -17,34 +20,34 @@ class CustomCard extends StatelessWidget {
               offset: const Offset(10, 10),
             )
           ]),
-          child: const Card(
+          child: Card(
             elevation: 10,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'AHandBag Lv',
-                    style: TextStyle(
+                    product.title.substring(0 , 6),
+                    style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 3,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        r'$225',
-                        style: TextStyle(
+                        r'$' '${product.price.toString()}',
+                        style: const TextStyle(
                           fontSize: 16,
                         ),
                       ),
-                      Icon(
+                      const Icon(
                         Icons.favorite,
                         color: Colors.red,
                       ),
@@ -59,8 +62,9 @@ class CustomCard extends StatelessWidget {
           right: 32,
           bottom: 100,
           child: Image.network(
-            '',
+            product.image,
             height: 85,
+            width: 100,
           ),
         ),
       ],
